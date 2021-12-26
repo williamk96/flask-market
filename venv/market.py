@@ -25,3 +25,11 @@ def market():
         {'id': 3, 'name': 'Keyboard', 'barcode': '231985128446', 'price': 150}
     ]
     return render_template('market.html', items=items)
+
+@app.route('/login')
+def home():
+    return render_template('login.html')
+
+@app.route('/register')
+def home():
+    return render_template('register.html')

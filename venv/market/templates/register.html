@@ -9,7 +9,7 @@
             <form method="POST" class="form-register" style="color:white">
                 {{ form.hidden_tag() }}
                 <img class="mb-4" src="{{ url_for('static', filename='images/bible.png') }}" style="width: 200px; height: 200px;">
-                <h1 class="h3 mb-3 font-weight-normal">Create your account</h1>
+                <h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
                 {{ form.username(class="form-control", placeholder="username") }}
                 <br>
                 {{ form.email(class="form-control", placeholder="youremail@domain.tld") }}
@@ -17,6 +17,11 @@
                 {{ form.password1(class="form-control", placeholder="super strong password") }}
                 <br>
                 {{ form.password2(class="form-control", placeholder="retype super strong password") }}
+                <br>
+                <div class="checkbox mb-3">
+                    <h6>Already have an account?</h6>
+                    <a class="btn btn-sm btn-secondary" href="{{ url_for('login') }}">Login</a>
+                </div>
                 <br>
                 {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
                 <br>

@@ -12,18 +12,17 @@ class Items(db.Model):
     barcode = db.Column(db.String(length=12), nullable=False, unique=True)
     description = db.Column(db.String(length=1024), nullable=False, unique=True)
 
+    def __repr__(self):
+        return f'Item {self.name}'
+
 @app.route('/')
-@app.route('/index')
-def index():
+@app.route('/home')
+def home():
     return render_template('bible-study.html')
 
 @app.route('/market')
 def market():
-    items = [
-        {'id': 1, 'name': 'Phone', 'barcode': '893212299897', 'price': 500},
-        {'id': 2, 'name': 'Laptop', 'barcode': '123985473165', 'price': 900},
-        {'id': 3, 'name': 'Keyboard', 'barcode': '231985128446', 'price': 150}
-    ]
+    items = Items.query.all()
     return render_template('market.html', items=items)
 
 @app.route('/login')

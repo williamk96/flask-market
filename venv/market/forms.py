@@ -6,12 +6,12 @@ from market.models import Users
 class RegisterForm(FlaskForm):
 
     def validate_username(self, username_to_check):
-        user = Users.query.filter_by(username=username_to_check).first()
+        user = Users.query.filter_by(username=username_to_check.data).first()
         if user:
             raise ValidationError('Username already exists! Please try a different username.')
 
     def validate_email(self, email_to_check):
-        email = Users.query.filter_by(email=email_to_check).first()
+        email = Users.query.filter_by(email=email_to_check.data).first()
         if email:
             raise ValidationError('Email address already exists! Please try a different email address.')
 

@@ -4,14 +4,23 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <form method="POST" class="form-register" style="color:white">
-            <img class="mb-4" src="{{ url_for('static', filename='images/add-user.png') }}">
-            <h1 class="h3 mb-3 font-weight-normal">Create your account</h1>
-            {{ form.username(class="form-control", placeholder="username") }}
-            {{ form.email(class="form-control", placeholder="youremail@domain.tld") }}
-            {{ form.password1(class="form-control", placeholder="super strong password") }}
-            {{ form.password2(class="form-control", placeholder="retype super strong password") }}
-        </form>
-    </div>
+    <body class="text-center">
+        <div class="container">
+            <form method="POST" class="form-register" style="color:white">
+                {{ form.hidden_tag() }}
+                <img class="mb-4" src="{{ url_for('static', filename='images/bible.png') }}" style="width: 200px; height: 200px;">
+                <h1 class="h3 mb-3 font-weight-normal">Create your account</h1>
+                {{ form.username(class="form-control", placeholder="username") }}
+                <br>
+                {{ form.email(class="form-control", placeholder="youremail@domain.tld") }}
+                <br>
+                {{ form.password1(class="form-control", placeholder="super strong password") }}
+                <br>
+                {{ form.password2(class="form-control", placeholder="retype super strong password") }}
+                <br>
+                {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+                <br>
+            </form>
+        </div>
+    </body>
 {% endblock %}

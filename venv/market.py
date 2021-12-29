@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLA_DB_URI'] = 'sqlite:///market.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///market.db'
 db = SQLAlchemy(app)
 
 class Items(db.Model):
@@ -13,8 +13,8 @@ class Items(db.Model):
     description = db.Column(db.String(length=1024), nullable=False, unique=True)
 
 @app.route('/')
-@app.route('/home')
-def home():
+@app.route('/index')
+def index():
     return render_template('bible-study.html')
 
 @app.route('/market')
@@ -27,9 +27,9 @@ def market():
     return render_template('market.html', items=items)
 
 @app.route('/login')
-def home():
+def login():
     return render_template('login.html')
 
 @app.route('/register')
-def home():
+def register():
     return render_template('register.html')

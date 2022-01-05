@@ -14,6 +14,13 @@ class Users(db.Model, UserMixin):
     items = db.relationship('Items', backref='owned_user', lazy=True)
 
     @property
+    def pretty_budget(self):
+        if len(str(self.budget)) >= 4:
+            return f"${str(self.budget)[:-3]},{str(self.budget)[-3:]}"
+        else:
+            return f"${self.budget}"
+
+    @property
     def password(self):
         return self.password
 

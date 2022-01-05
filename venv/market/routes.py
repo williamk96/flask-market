@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash
 from market.models import Items, Users
 from market.forms import RegisterForm, LoginForm
 from market import db
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 @app.route('/')
 @app.route('/home')
@@ -11,6 +11,7 @@ def home():
     return render_template('bible-study.html')
 
 @app.route('/market')
+@login_required
 def market():
     items = Items.query.all()
     return render_template('market.html', items=items)
@@ -35,6 +36,9 @@ def register():
         user_to_create = Users(username=form.username.data, email=form.email.data, password=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
+        login_user(user_to_create)
+        flash("Registration Successful!", category="success")
+
         return redirect(url_for('market'))
 
     return render_template('register.html', form=form)

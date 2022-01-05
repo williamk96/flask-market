@@ -42,9 +42,15 @@
             </div>
             <div class="modal-body">
                 <!-- text/paragraph -->
-                Are you sure you want to buy: "{{ item.name }}" for ${{ item.price }}?
                 <form method="POST">
-
+                    {{ purchase.hidden_tag() }}
+                    <h4 class="text-center">
+                        Are you sure you want to buy: "{{ item.name }}" for ${{ item.price }}?
+                    </h4>
+                    <p class="text-center">
+                        <em>Clicking "Purchase Item" will finalize your order.</em>
+                    </p>
+                    {{ purchase.submit(class="btn btn-outline-success btn-block") }}
                 </form>
             </div>
             <div class="modal-footer">

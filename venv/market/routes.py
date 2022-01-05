@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash
 from market.models import Items, Users
 from market.forms import RegisterForm, LoginForm
 from market import db
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 @app.route('/')
 @app.route('/home')
@@ -38,3 +38,9 @@ def register():
         return redirect(url_for('market'))
 
     return render_template('register.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash("Logout Successful!", category="info")
+    return redirect(url_for('home'))

@@ -19,12 +19,11 @@ def market():
         p_item_object = Items.query.filter_by(name=purchased_item).first()
         if p_item_object:
             if current_user.can_purchase(p_item_object):
-                p_item_object.owner = current_user.id
-                current_user.budget -= p_item_object.price
-                db.session.commit()
+                p_item_object.buy(current_user)
                 flash("Purchase successful!", category="success")
             else:
-                flash(f"Unfortunately, you don't have enough money to purchase {p_item_object}.", category="danger")
+                flash("Unfortunately, you don't have enough money to purchase that item.", category="danger")
+        return redirect(url_for('market'))
 
     if request.method == "GET":
         items = Items.query.filter_by(owner=None)

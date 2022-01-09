@@ -1,7 +1,7 @@
 from market import app
 from flask import render_template, redirect, url_for, flash, request
 from market.models import Items, Users
-from market.forms import RegisterForm, LoginForm, PurchaseForm
+from market.forms import RegisterForm, LoginForm, PurchaseForm, SellForm
 from market import db
 from flask_login import login_user, logout_user, login_required, current_user
 
@@ -14,7 +14,9 @@ def home():
 @login_required
 def market():
     purchase = PurchaseForm()
+    sell = SellForm()
     if request.method == "POST":
+        #Purchase Item Logic
         purchased_item = request.form.get('purchased_item')
         p_item_object = Items.query.filter_by(name=purchased_item).first()
         if p_item_object:
@@ -23,12 +25,21 @@ def market():
                 flash("Purchase successful!", category="success")
             else:
                 flash("Unfortunately, you don't have enough money to purchase that item.", category="danger")
+        #Sell Item Logic
+        sold_item = request.form.get('sold_item')
+        s_item_object = Items.query.filter_by(name=sold_item).first()
+        if s_item_object:
+            if current_user.can_sell(s_item_object):
+                s_item_object.sell(current_user)
+                flash(f"Congratulations! You sold: {s_item_object}.", category="success")
+            else:
+                flash(f"Something went wrong when trying to sell {s_item_object}", category="danger")
         return redirect(url_for('market'))
 
     if request.method == "GET":
         items = Items.query.filter_by(owner=None)
         owned_items = Items.query.filter_by(owner=current_user.id)
-        return render_template('market.html', items=items, purchase=purchase, owned_items=owned_items)
+        return render_template('market.html', items=items, purchase=purchase, owned_items=owned_items, sell=sell)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

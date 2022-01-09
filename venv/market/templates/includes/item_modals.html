@@ -48,7 +48,7 @@
                         Are you sure you want to buy: "{{ item.name }}" for ${{ item.price }}?
                     </h4>
                     <p class="text-center">
-                        <em>Clicking "Purchase Item" will finalize your order.</em>
+                        <em>Clicking "Purchase" will finalize your order.</em>
                     </p><br>
                     <input id="purchased_item" name="purchased_item" type="hidden" value="{{ item.name }}">
                     {{ purchase.submit(class="btn btn-outline-success btn-block") }}

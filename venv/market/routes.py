@@ -27,7 +27,8 @@ def market():
 
     if request.method == "GET":
         items = Items.query.filter_by(owner=None)
-        return render_template('market.html', items=items, purchase=purchase)
+        owned_items = Items.query.filter_by(owner=current_user.id)
+        return render_template('market.html', items=items, purchase=purchase, owned_items=owned_items)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

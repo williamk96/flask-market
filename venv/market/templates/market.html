@@ -39,6 +39,19 @@
     </div>
     <div class="col-4">
         <h3>Owned Items</h3><br>
+        <div class="row">
+            {% for owned_item in owned_items %}
+                <div class="col-md-6">
+                    <div class="card text-center bg-dark" style="margin-bottom: 5px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ owned_item.name }}</h5>
+                            <button type="button" class="btn btn-outline-danger" style="margin-bottom: 5px;" data-toggle="modal" data-target="#YourDataTarget">Sell</button>
+                            <p class="card-text"><strong>This item costs ${{ owned_item.price }}.</strong></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 

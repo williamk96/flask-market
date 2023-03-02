@@ -8,7 +8,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('bible-study.html')
+    return render_template('home.html')
 
 @app.route('/market', methods=['GET', 'POST'])
 @login_required

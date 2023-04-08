@@ -3,3 +3,4 @@
 /market/lib/__pycache__
 .env
 market.db
+market/market.db

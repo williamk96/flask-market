@@ -1,3 +1,5 @@
 /instance
 /market/__pycache__
+/market/lib/__pycache__
 .env
+market.db

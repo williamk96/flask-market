@@ -1,4 +1,4 @@
-from market import db, bcrypt, login_manager
+from market.app import db, bcrypt, login_manager
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -10,15 +10,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
-    budget = db.Column(db.Integer(), nullable=False, default=1000)
     items = db.relationship('Items', backref='owned_user', lazy=True)
-
-    @property
-    def pretty_budget(self):
-        if len(str(self.budget)) >= 4:
-            return f"${str(self.budget)[:-3]},{str(self.budget)[-3:]}"
-        else:
-            return f"${self.budget}"
 
     @property
     def password(self):
@@ -30,12 +22,6 @@ class Users(db.Model, UserMixin):
     
     def check_password(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
-    
-    def can_purchase(self, item_obj):
-        return self.budget >= item_obj.price
-    
-    def can_sell(self, item_obj):
-        return item_obj in self.items
 
     def __repr__(self):
         return f'{self.username}'

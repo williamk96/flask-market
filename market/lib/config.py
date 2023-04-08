@@ -13,6 +13,7 @@ class config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class dev_config(config):
+    name = 'development'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///market.db'
     DEBUG = True
     TESTING = True
@@ -23,6 +24,7 @@ class dev_config(config):
 
 
 class prod_config(config):
+    name = 'production'
     # create a production config here
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://bsre-one:12qwaszx!@QWASZX'
     SECRET_KEY = str(r.value)

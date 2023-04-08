@@ -12,6 +12,8 @@ flask-wtf = "*"
 wtforms = "*"
 python-dotenv = "*"
 email-validator = "*"
+colorama = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

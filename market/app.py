@@ -13,6 +13,7 @@ app_config = dev_config()
 
 app = Flask(__name__)
 app.config.from_object(app_config)
+print(' * Using {}'.format(app_config))
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -22,10 +23,9 @@ login_manager.login_message_category = "info"
 
 from market.routes import *
 
-print(' * Using {}'.format(app_config))
-
 # run some automated checks if using development configuration
 if app_config.name == 'development':
     db_path = Path('.')/'market.db'
     if not os.path.isfile(db_path) or not verify_sqlite_db(db_path):
-        pass
+        print(' * Initializing Development Database...')
+        db.create_all()

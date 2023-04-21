@@ -1,4 +1,4 @@
-from market.app import db, bcrypt, login_manager
+from market.app import app, db, bcrypt, login_manager
 from market.lib.get_barcode import barcode
 from flask_login import UserMixin
 
@@ -12,6 +12,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
+    twofa_status = db.Column
     cart = db.Column(db.Integer(), db.ForeignKey('carts.id'))
 
     @property

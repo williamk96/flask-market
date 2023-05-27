@@ -14,10 +14,10 @@ python-dotenv = "*"
 email-validator = "*"
 colorama = "*"
 psycopg2-binary = "*"
-code128 = "*"
 setuptools = "*"
 flask-security-too = "*"
 pyotp = "*"
+python-barcode = "*"
 
 [dev-packages]
 

@@ -1,5 +1,6 @@
 from pathlib import Path
 from dotenv import load_dotenv
+
 from market.lib.key import key
 
 path = Path('.')/'.env'

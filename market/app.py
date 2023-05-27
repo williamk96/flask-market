@@ -5,6 +5,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+
 from market.lib.verify_sqlite_db import verify_sqlite_db
 from market.lib.config import *
 from market.models import *

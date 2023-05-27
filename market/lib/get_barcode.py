@@ -1,6 +1,7 @@
 import secrets
 import string
 import barcode
+
 from barcode.writer import SVGWriter
 from pathlib import Path
 

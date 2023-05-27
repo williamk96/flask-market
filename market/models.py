@@ -1,6 +1,7 @@
+from flask_login import UserMixin
+
 from market.app import app, db, bcrypt, login_manager
 from market.lib.get_barcode import barcode
-from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):

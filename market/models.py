@@ -37,7 +37,7 @@ class Items(db.Model):
     barcode = db.Column(db.String(length=24), nullable=False, unique=True)
     description = db.Column(db.String(length=1024), nullable=False)
     inventory = db.Column(db.Integer())
-    in_cart = db.Column(db.Integer(), db.ForeignKey('carts.id'))
+    cart_id = db.Column(db.Integer(), db.ForeignKey('carts.id'))
 
     def __repr__(self):
         return f'{self.name}'
@@ -50,7 +50,7 @@ class Items(db.Model):
     def __init__(self, name, price, description):
         self.name = name
         self.price = price
-        self.barcode = barcode()
+        self.barcode = barcode().value
         self.description = description
         self.inventory = 0
 

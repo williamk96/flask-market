@@ -1,4 +1,6 @@
+import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 from market.lib.key import key
@@ -19,7 +21,7 @@ class config(object):
 # Base Configuration + Development-specific configuration
 class dev_config(config):
     name = 'development'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///market.db'
+    SQLALCHEMY_DATABASE_URI = os.getenv("DEV_DB_URI")
     DEBUG = True
     TESTING = True
 
@@ -31,7 +33,7 @@ class dev_config(config):
 class prod_config(config):
     name = 'production'
     # create a production config here
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://bsre-one:12qwaszx!@QWASZX'
+    SQLALCHEMY_DATABASE_URI = os.getenv("PRO_DB_URI")
 
     def __repr__(self):
         return "Production Configuration"

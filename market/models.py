@@ -11,10 +11,22 @@ def load_user(user_id):
 class Users(db.Model, UserMixin):
     __tablename__ = 'Users'
     id = db.Column(db.Integer(), primary_key=True)
-    username = db.Column(db.String(length=255), nullable=False, unique=True)
+    username = db.Column(
+        db.String(length=255),
+        nullable=False,
+        unique=True
+    )
     email = db.Column(db.String(length=255), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
-    twofa_status = db.Column(db.String(length=255), db.CheckConstraint('disabled', 'registered', 'enabled'), nullable=False, default='disabled')
+    twofa_status = db.Column(
+        db.String(length=255),
+        db.CheckConstraint(
+            'disabled',
+            'registered',
+            'enabled'),
+        nullable=False,
+        default='disabled'
+    )
     cart = db.Column(db.Integer(), db.ForeignKey('carts.id'))
 
     @property
@@ -30,7 +42,7 @@ class Users(db.Model, UserMixin):
 
     def __repr__(self):
         return f'{self.username}'
-        
+
 
 class Items(db.Model):
     __tablename__ = 'Items'

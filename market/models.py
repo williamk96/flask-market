@@ -1,7 +1,9 @@
 from flask_login import UserMixin
+from sqlalchemy.orm import validates
 
 from market.app import app, db, bcrypt, login_manager
 from market.lib.get_barcode import barcode
+from market.lib.input_validation import email_is_valid
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -29,13 +31,22 @@ class Users(db.Model, UserMixin):
     )
     cart = db.Column(db.Integer(), db.ForeignKey('carts.id'))
 
+    @validates('email')
+    def validate_email(self, key, address):
+        if not (email_is_valid(address)):
+            raise ValueError("The provided email is invalid.")
+        return address
+
     @property
     def password(self):
         return self.password
 
     @password.setter
     def password(self, plain_text_password):
-        self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+        self.password_hash = \
+            bcrypt\
+                .generate_password_hash(plain_text_password)\
+                    .decode('utf-8')
     
     def check_password(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)

@@ -7,6 +7,7 @@ from market.lib.get_barcode import barcode
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
+
 class Users(db.Model, UserMixin):
     __tablename__ = 'Users'
     id = db.Column(db.Integer(), primary_key=True)
@@ -29,6 +30,7 @@ class Users(db.Model, UserMixin):
 
     def __repr__(self):
         return f'{self.username}'
+        
 
 class Items(db.Model):
     __tablename__ = 'Items'

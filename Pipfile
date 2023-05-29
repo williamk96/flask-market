@@ -18,6 +18,8 @@ setuptools = "*"
 flask-security-too = "*"
 pyotp = "*"
 python-barcode = "*"
+sqlalchemy = "*"
+phonenumbers = "*"
 
 [dev-packages]
 

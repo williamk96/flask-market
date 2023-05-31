@@ -10,15 +10,18 @@ load_dotenv(dotenv_path=path)
 
 k = key()
 
-# Base configuration
+
 class config(object):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # Instance-unique settings for security
+    INSTANCE_UUID = k.uuid
+    INSTANCE_TIMESTAMP = k.timestamp
     SECRET_KEY = k.value
-    SECURITY_PASSWORD_SALT = k.salt
+    PASSWORD_SALT = k.salt
 
-# Base Configuration + Development-specific configuration
+
 class dev_config(config):
     name = 'development'
     SQLALCHEMY_DATABASE_URI = os.getenv("DEV_DB_URI")
